@@ -1,0 +1,191 @@
+:root {
+    --bg-color: #1e1e1e; /* Fundo principal - Preto Carbono */
+    --bg-second: #262626;
+    --highlight-color: #ff6f61; /* Cor de destaque - Vermelho Coral */
+    --primary-color: #00bcd4; /* Cor primária - Ciano Brilhante */
+    --secondary-color: #ffeb3b; /* Cor secundária - Amarelo Brilhante */
+    --text-color: #ececec; /* Cor de texto - Cinza Claro */
+    --border-color: #424242; /* Cor de borda - Cinza Médio */
+}  
+
+body{
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+header{
+    height: 50px;
+    width: 100%;
+    display: flex;
+    padding: 12px;
+    justify-content: space-between;
+
+    & h1{
+        font-size: 2em;
+    }
+}
+#no__account{
+    border: 3px solid var(--primary-color);
+    padding: 4px 25px;
+    border-radius: 6px;
+    color: #dffbff;
+    cursor: pointer;
+}
+#no__account:hover{
+    transform: scale(105%);
+    transition: 0.1s;
+}
+#ye__account{
+    display: flex;
+    & img{
+        width: 35px;
+        margin-right: 5px;
+    }
+    
+    & #id__profile{
+        transform: translateY(10px);
+        font-size: 1.1em;
+    }
+}
+
+main{
+    height: max-content;
+    padding: 10px 0px;
+}
+
+/*to do list*/
+
+#fazer__section{
+    border-radius: 10px;
+    width: 100%;
+    height: max-content;
+    max-width: 600px;
+    margin: auto;
+    padding: 10px;
+}
+#to_do_list{
+    display: flex;
+    justify-content: center;
+    height: max-content;
+    border-radius: 6px;
+    padding: 10px;
+    width: 96%;
+    flex-flow: column nowrap;
+    margin: auto;
+}
+.todo{
+    background-color: var(--bg-second);
+    border-radius: 10px;
+    padding: 12px;
+    display: flex;
+    height: max-content;
+    margin: 15px 0px;
+    border: 2px solid var(--bg-color);
+
+    & .imagen__user{
+        width: 50px;
+        height: 50px;
+        border-radius: 2px;
+    }
+}
+.close__todo{
+    transform: translateY(-11px);
+    cursor: pointer;
+    
+    & img{
+        width: 25px;
+        height: 25px;
+    }
+}
+
+.confi{
+    width: 90%;
+}
+
+.header__todo{
+    display: flex;
+    justify-content: space-between;
+
+    .title{
+        font-size: 1.4em;
+        margin-left: 10px;
+    }
+    button > img{
+        width: 40px;
+        cursor: pointer;
+        transform: translate(10px, -7px);
+    }
+}
+.descricao__todo{
+    margin: 5px 0px 0px 10px;
+    color: white;
+    width: 200px;
+    text-align: justify;
+    display: none;
+}
+.todo:active{
+    border: 2px solid white;
+    transition: 0.2s;
+    & .descricao__todo{
+        display: block;
+    }
+}
+
+#add__to_do{
+    margin-top: 30px;
+    color: black;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+
+    & input, button{
+        margin: 5px;
+        width: 160px;
+        border-radius: 5px;
+        padding: 6px 10px;
+        font-size: 1.1em;
+    }
+    & input:focus{
+        outline: none;
+    }
+}
+
+#submit__todo{
+    background-color: var(--primary-color);
+    font-size: 1.1em;
+    cursor: pointer;
+    color: white;
+}
+#submit__todo:active{
+    transform: scale(102%);
+    transition: 0.1s;
+}
+
+.wrong{
+    border: 2px solid var(--highlight-color);
+}
+
+nav{
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+    flex-flow: row wrap;
+
+    & button{
+        background-color: var(--bg-second);
+        padding: 6px 11px;
+        margin: 5px;
+        height: min-content;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+    & button:active{
+        transform: scale(103%);
+        transition: 0.1s;
+        background-color: var(--bg-color);
+    }
+}
+.ativo{
+    background-color: var(--primary-color);
+}
