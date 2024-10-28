@@ -139,6 +139,14 @@ main{
     flex-flow: row wrap;
     justify-content: center;
 
+    .wrong{
+        border: 2px solid var(--highlight-color);
+        color: var(--highlight-color);
+    }
+
+    & input{
+        border: 2px solid white;
+    }
     & input, button{
         margin: 5px;
         width: 160px;
@@ -162,9 +170,7 @@ main{
     transition: 0.1s;
 }
 
-.wrong{
-    border: 2px solid var(--highlight-color);
-}
+
 
 nav{
     display: flex;

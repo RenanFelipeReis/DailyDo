@@ -1,4 +1,6 @@
 const toDoList = document.querySelector('#to_do_list');
+const submitTodo = document.querySelector('#submit__todo');
+const noAccount = document.querySelector('#no__account');
 
 function todo (img, obj, desc) {
     toDoList.innerHTML += `
@@ -17,17 +19,64 @@ function todo (img, obj, desc) {
     `
 }
 
-function inputsValue () {
-    const submitTodo = document.querySelector('#submit__todo');
-    submitTodo.addEventListener('click', () => {
-        const objetivo = document.querySelector('#objetivo').value;
-        const descricao = document.querySelector('#descricao').value;
-        const urlDaImagem = document.querySelector('#Url__da__Imagem').value;
+noAccount.addEventListener('click', () => {
+    window.location.href = './conta.html'
+});
 
+submitTodo.addEventListener('click', (eve) => {
+    eve.preventDefault();
+    validInputs();
+});
 
+function validInputs () {
+    validImagem();
+    validObj();
+    validDesc();
+    
+    const inputs = document.querySelectorAll('#add__to_do input');
+    const valid = [...inputs].every((item) => {
+        return item.classList != 'wrong'
     });
+    if(valid === true){
+        const img = document.querySelector('#Url__da__Imagem').value;
+        const obj = document.querySelector('#objetivo').value;
+        const desc = document.querySelector('#descricao').value;
+        todo(img, obj, desc);        
+    }
 }
-inputsValue();
+
+function validImagem () {
+    const urlImagem = document.querySelector('#Url__da__Imagem');
+
+    if(urlImagem.value === ''){
+        errorInput(urlImagem, 'Preencha o Campo Da Imagem');
+    }else{
+        urlImagem.className = '';
+    }
+}
+function validObj () {
+    const urlObj = document.querySelector('#objetivo');
+
+    if(urlObj.value === ''){
+        errorInput(urlObj, 'Preencha o Campo Do Objetivo');
+    }else{
+        urlObj.className = '';
+    }
+}
+function validDesc () {
+    const urlDesc = document.querySelector('#descricao');
+
+    if(urlDesc.value === ''){
+        errorInput(urlDesc, 'Preencha o Campo Da Descrição');
+    }else{
+        urlDesc.className = '';
+    }
+}
+
+function errorInput (input, men) {
+    alert(men);
+    input.className = 'wrong';
+}
 
 function excluirToDo () {
     const excluir = document.querySelectorAll('.close');
@@ -41,15 +90,6 @@ function excluirToDo () {
 }
 excluirToDo();
 
-function StoregedToDo () {
-    let inStorage = JSON.parse(localStorage.getItem('to do inf')) || [];
 
-    if(inStorage != []){
-        
-    }
-}
-StoregedToDo()
 
-function chekoutImagem () {
 
-}
