@@ -1,6 +1,7 @@
 const toDoList = document.querySelector('#to_do_list');
 const submitTodo = document.querySelector('#submit__todo');
 const noAccount = document.querySelector('#no__account');
+const accountDaily = document.querySelector('#account__daily');
 
 function todo (img, obj, desc) {
     toDoList.innerHTML += `
@@ -28,6 +29,7 @@ submitTodo.addEventListener('click', (eve) => {
     validInputs();
 });
 
+var i = 0
 function validInputs () {
     validImagem();
     validObj();
@@ -41,7 +43,30 @@ function validInputs () {
         const img = document.querySelector('#Url__da__Imagem').value;
         const obj = document.querySelector('#objetivo').value;
         const desc = document.querySelector('#descricao').value;
-        todo(img, obj, desc);        
+
+        excluirToDo();
+        const local = JSON.parse(localStorage.getItem('to do inf')) || []
+        let store = [
+            img,
+            obj,
+            desc
+        ];
+        if(local.length >= 10){
+            alert('O maximo de afazeres é 10');
+        }else todo(img, obj, desc);
+
+        local.push(store);
+        let user = JSON.parse(localStorage.getItem('user')) || [];
+        console.log(local);
+        
+        if(user.length === 0){
+            if(i == 0){
+                alert('Para não perder os seus afazeres crie uma conta');
+                i++
+            }
+        }else{
+            localStorage.setItem('to do inf', JSON.stringify(local));
+        } 
     }
 }
 
@@ -79,17 +104,50 @@ function errorInput (input, men) {
 }
 
 function excluirToDo () {
+    
     const excluir = document.querySelectorAll('.close');
     const listToDo = document.querySelectorAll('.todo');
 
     excluir.forEach((exc, i) => {
-        exc.addEventListener('click', () => {
-            listToDo[i].remove(); 
+        exc.addEventListener('click', () => {            
+            listToDo[i].remove();
         });
     });
 }
 excluirToDo();
 
+function accountCreat() {
+    let verify = JSON.parse(localStorage.getItem('user')) || [];
+    
+    if (verify.length > 0) {
+        noAccount.style.display = 'none';
+        accountDaily.innerHTML = `
+            <div id="ye__account">
+                <img src="icons/account_blue.png" alt="foto conta">
+                <p id="id__profile">${verify[0]}</p>
+            </div>
+        `;
+    } else {
+        noAccount.style.display = 'flex';       
+        const account = document.querySelector('#ye__account');
+        account.style.display = 'none'
+    }
+}
+accountCreat();
 
+function storagedToDo () {
+    const getToDo = JSON.parse(localStorage.getItem('to do inf')) || [];
+    
+    if(getToDo.length != 0){
+        for(i = 0; i < 10; i++){
+            let toDo = getToDo[i];
+            const img = toDo[0];
+            const obj = toDo[1];
+            const desc = toDo[2];
 
-
+            todo(img, obj, desc);
+            excluirToDo();
+        }
+    }
+}
+storagedToDo();
