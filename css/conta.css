@@ -95,7 +95,7 @@ header{
     height: 50px;
     align-items: center;
     padding: 5px 10px;
-    box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.146);
+    box-shadow: 0px 0px 8px rgba(255, 255, 255, 0.146);
     cursor: pointer;
     top: 85%;
     left: 10px;
@@ -109,6 +109,10 @@ header{
         font-size: 1.3em;
         margin: 0px 10px;
     }
+}
+#voltar__inicial:hover{
+    box-shadow: 0px 0px 12px rgba(255, 255, 255, 0.146);
+    transition: 0.1s;
 }
 #voltar__inicial:active{
     transform: scale(98%);

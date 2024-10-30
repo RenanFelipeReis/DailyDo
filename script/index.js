@@ -20,6 +20,23 @@ function todo (img, obj, desc) {
     `
 }
 
+function exemplo () {
+    toDoList.innerHTML = `
+        <div class="todo">
+        <img class="imagen__user" src="https://static.vecteezy.com/ti/vetor-gratis/p1/7480068-icon-programming-adequado-para-programacao-symbol-glyph-style-simple-design-editable-design-template-vector-simple-symbol-illustration-vetor.jpg" alt="imagem tarefa">
+        <div class="confi">
+            <div class="header__todo">
+                <h3 class="title">olá</h3>
+                <button class="close">
+                    <img src="icons/close.png" alt="excluir Afazer">
+                </button>
+            </div>
+            <p class="descricao__todo">Exemplo de um afazer</p>
+        </div>
+    </div>
+` 
+}
+
 noAccount.addEventListener('click', () => {
     window.location.href = './conta.html'
 });
@@ -53,11 +70,16 @@ function validInputs () {
         ];
         if(local.length >= 10){
             alert('O maximo de afazeres é 10');
-        }else todo(img, obj, desc);
+        }else{
+            todo(img, obj, desc);
+            inputs.forEach((inp) => {
+                inp.value = ''
+            });
+            excluirToDo();
+        } 
 
         local.push(store);
         let user = JSON.parse(localStorage.getItem('user')) || [];
-        console.log(local);
         
         if(user.length === 0){
             if(i == 0){
@@ -104,16 +126,20 @@ function errorInput (input, men) {
 }
 
 function excluirToDo () {
-    
     const excluir = document.querySelectorAll('.close');
     const listToDo = document.querySelectorAll('.todo');
-
+    
     excluir.forEach((exc, i) => {
-        exc.addEventListener('click', () => {            
+        exc.addEventListener('click', () => {
             listToDo[i].remove();
+            const getToDoInf = JSON.parse(localStorage.getItem('to do inf')) || [];
+            getToDoInf.splice(i, 1);/*Remove o item no índice i do array getToDoInf. O método splice altera o array original, removendo um item (o segundo argumento 1 indica que apenas um item será removido) no índice i. o metódo splice pode manipular outro arrays*/
+            localStorage.setItem('to do inf', JSON.stringify(getToDoInf));
+            
         });
     });
 }
+
 excluirToDo();
 
 function accountCreat() {
@@ -128,8 +154,10 @@ function accountCreat() {
             </div>
         `;
     } else {
-        noAccount.style.display = 'flex';       
+        noAccount.style.display = 'flex';
         const account = document.querySelector('#ye__account');
+        exemplo();
+        excluirToDo();
         account.style.display = 'none'
     }
 }
@@ -144,7 +172,6 @@ function storagedToDo () {
             const img = toDo[0];
             const obj = toDo[1];
             const desc = toDo[2];
-
             todo(img, obj, desc);
             excluirToDo();
         }
